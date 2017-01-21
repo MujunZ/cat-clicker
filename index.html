@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cat Clicker</title>
+</head>
+<body>
+	<div id="cat">
+		<img src="images/cat.jpg" alt="">
+	</div>
+	<h1 id="clickCountMsg">Click the cat</h1>
+	<script>
+		var cat = document.getElementById('cat');
+			clickCount = 0;
+			clickCountMsg = document.getElementById('clickCountMsg');
+		// cat.onclick = function () {
+		// 	clickCount++;
+		// 	clickCountMsg.text('You clicked' + clickCount);
+		// };
+		cat.addEventListener('click', function (e) {
+			clickCount++;
+			clickCountMsg.textContent = 'You clicked ' + clickCount + ' times.';
+		},false);
+	</script>
+</body>
+</html>
