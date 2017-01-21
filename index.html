@@ -5,22 +5,21 @@
 	<title>Cat Clicker</title>
 </head>
 <body>
-	<div id="cat">
+	<div id="cat1" class="cats">
 		<img src="images/cat.jpg" alt="">
 	</div>
 	<h1 id="clickCountMsg">Click the cat</h1>
 	<script>
-		var cat = document.getElementById('cat');
+		var cats = document.getElementsByClassName('cats');
 			clickCount = 0;
 			clickCountMsg = document.getElementById('clickCountMsg');
-		// cat.onclick = function () {
-		// 	clickCount++;
-		// 	clickCountMsg.text('You clicked' + clickCount);
-		// };
-		cat.addEventListener('click', function (e) {
-			clickCount++;
-			clickCountMsg.textContent = 'You clicked ' + clickCount + ' times.';
-		},false);
+		for (var i=0; i<cats.length; i++){
+			var cat = cats[i];
+			cat.addEventListener('click', function (e) {
+				clickCount++;
+				clickCountMsg.textContent = 'You clicked ' + clickCount + ' times.';
+			},false);
+		}
 	</script>
 </body>
 </html>
