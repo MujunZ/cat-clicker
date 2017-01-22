@@ -3,23 +3,63 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cat Clicker</title>
+	<script src="js/jQuery.js"></script>
 </head>
 <body>
-	<div id="cat1" class="cats">
+	<!-- <div id="cat1" class="cats">
 		<img src="images/cat.jpg" alt="">
 	</div>
-	<h1 id="clickCountMsg">Click the cat</h1>
+	<h1 id="clickCountMsg">Click the cat</h1> -->
+	<div id="catCounts">
+	</div>
 	<script>
-		var cats = document.getElementsByClassName('cats');
-			clickCount = 0;
-			clickCountMsg = document.getElementById('clickCountMsg');
-		for (var i=0; i<cats.length; i++){
-			var cat = cats[i];
-			cat.addEventListener('click', function (e) {
-				clickCount++;
-				clickCountMsg.textContent = 'You clicked ' + clickCount + ' times.';
-			},false);
-		}
+		// var cats = document.getElementsByClassName('cats');
+		// 	clickCount = 0;
+		// 	clickCountMsg = document.getElementById('clickCountMsg');
+		// for (var i=0; i<cats.length; i++){
+		// 	var cat = cats[i];
+		// 	cat.addEventListener('click', function (e) {
+		// 		clickCount[i]++;
+		// 		clickCountMsg.textContent = 'You clicked ' + clickCount + ' times.';
+		// 	},false);
+		// }
+
+/*
+* @description 
+*/
+
+/*
+* @description generate cats
+*/
+		document.addEventListener('DOMContentLoaded', function () {
+			var $catsDiv = $('#catCounts');
+			for (var i = 0; i < 2; i++) {
+				$catsDiv.append('<div class = "cats" id="cat'+(i+1)+
+					'"></div>');
+			var $cat = $('.cats:nth-of-type(' + (i+ 1) +')');
+			var	catImg ='<img id="catImg'+(i+1)+'" src="images/cat'+(i+1)+'.jpg">';
+				catName = '<h1>My Name is CAT'+(i+1)+'</h1>';
+				catClickMsg = '<h1 class = "catClickMsg" id = "catClickMsg'+(i+1)+'">Click Me</h1>';
+				clickCount = [];
+			$cat.append(catImg);
+			$cat.prepend(catName);
+			$cat.append(catClickMsg);
+			};
+			catClick();
+		}, false);
+
+/*
+* @description count clicks
+*/
+			catClick = function () {
+				var clickCount1 = 0;
+				var cat1 = $('#catImg1');
+				$('#catImg1').click(function () {
+					clickCount1++;
+					catClickMsg = '<p>Clicked '+clickCount1+' Times.</p>';
+					$('#catClickMsg1').html(catClickMsg);		
+				});
+			};
 	</script>
 </body>
 </html>
