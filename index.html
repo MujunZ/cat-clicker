@@ -45,19 +45,21 @@
 			$cat.prepend(catName);
 			$cat.append(catClickMsg);
 			};
-			catClick();
+			for (var i = 0; i < 2; i++) {
+				catClick(i);
+			};
 		}, false);
 
 /*
 * @description count clicks
 */
-			catClick = function () {
-				var clickCount1 = 0;
-				var cat1 = $('#catImg1');
-				$('#catImg1').click(function () {
-					clickCount1++;
-					catClickMsg = '<p>Clicked '+clickCount1+' Times.</p>';
-					$('#catClickMsg1').html(catClickMsg);		
+			catClick = function (i) {
+				var clickCount = [];
+					clickCount[i] = 0;
+				$('#catImg'+(i+1)).click(function () {
+					clickCount[i]++;
+					catClickMsg = '<p>Clicked '+clickCount[i]+' Times.</p>';
+					$('#catClickMsg'+(i+1)).html(catClickMsg);		
 				});
 			};
 	</script>
