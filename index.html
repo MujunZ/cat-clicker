@@ -6,43 +6,80 @@
 	<script src="js/jQuery.js"></script>
 </head>
 <body>
-	<div id="catCounts">
-	</div>
+<!-- 	<div id="catCounts">
+	</div> -->
 	<script>
-/*
-* @description generate cats
-*/
-		document.addEventListener('DOMContentLoaded', function () {
-			var $catsDiv = $('#catCounts');
-			for (var i = 0; i < 2; i++) {
-				$catsDiv.append('<div class = "cats" id="cat'+(i+1)+
-					'"></div>');
-			var $cat = $('.cats:nth-of-type(' + (i+ 1) +')');
-			var	catImg ='<img id="catImg'+(i+1)+'" src="images/cat'+(i+1)+'.jpg">';
-				catName = '<h1>My Name is CAT'+(i+1)+'</h1>';
-				catClickMsg = '<h1 class = "catClickMsg" id = "catClickMsg'+(i+1)+'">Click Me</h1>';
-				clickCount = [];
-			$cat.append(catImg);
-			$cat.prepend(catName);
-			$cat.append(catClickMsg);
-			};
-			for (var i = 0; i < 2; i++) {
-				catClick(i);
-			};
-		}, false);
+// /*
+// * @description generate cats
+// */
+		// document.addEventListener('DOMContentLoaded', function () {
+			// var $catsDiv = $('#catCounts');
+			// for (var i = 0; i < 2; i++) {
+			// 	$catsDiv.append('<div class = "cats" id="cat'+(i+1)+
+			// 		'"></div>');
+			// var $cat = $('.cats:nth-of-type(' + (i+ 1) +')');
+			// var	catImg ='<img id="catImg'+(i+1)+'" src="images/cat'+(i+1)+'.jpg">';
+			// 	catName = '<h1>My Name is CAT'+(i+1)+'</h1>';
+			// 	catClickMsg = '<h1 class = "catClickMsg" id = "catClickMsg'+(i+1)+'">Click Me</h1>';
+			// 	clickCount = [];
+			// $cat.append(catImg);
+			// $cat.prepend(catName);
+			// $cat.append(catClickMsg);
+			// };
+			// for (var i = 0; i < 2; i++) {
+			// 	catClick(i);
+			// };
+		// }, false);
 
-/*
-* @description count clicks
-*/
-			catClick = function (i) {
-				var clickCount = [];
-					clickCount[i] = 0;
-				$('#catImg'+(i+1)).click(function () {
-					clickCount[i]++;
-					catClickMsg = '<p>Clicked '+clickCount[i]+' Times.</p>';
-					$('#catClickMsg'+(i+1)).html(catClickMsg);		
-				});
-			};
+// /*
+// * @description count clicks
+// */
+// 			catClick = function (i) {
+// 				var clickCount = [];
+// 					clickCount[i] = 0;
+// 				$('#catImg'+(i+1)).click(function () {
+// 					clickCount[i]++;
+// 					catClickMsg = '<p>Clicked '+clickCount[i]+' Times.</p>';
+// 					$('#catClickMsg'+(i+1)).html(catClickMsg);		
+// 				});
+// 			};
+
+//try a new approach: object --> generate --> append
+	var cats = {
+	    "cats": [{
+	        "name": "Alpha",
+	        "pic": "images/cat1.jpg"
+	    }, {
+	        "name": "Beta",
+	        "pic": "images/cat2.jpg"
+	    }]
+	};
+
+	var catGenerater = function () {
+		var num = cats.length;
+		for (var i = 0; i < num; i++) {
+			var cat = $('<div></div>');
+				catName = '<h1>My Name is '+ cats.cats[i].name +'</h1>';
+				catImg = '<img id="catImg'+(i+1)+'" src="images/cat'+(i+1)+'.jpg">';
+				catClickMsg = '<h1 class = "catClickMsg" id = "catClickMsg'+(i+1)+'">Click Me</h1>';
+				clickCount = 0;
+			cat.attr({
+				class: 'cats',
+				id: 'cat' + (i+1)
+			});
+			cat.prepend(catName);
+			cat.append(catImg,catClickMsg);
+			cat.addEventListener('click', function (i) {
+				clickCount++;
+				catClickMsg = '<p>Clicked' + clickCount + 'Times.</p>';
+				$('#catClickMsg'+(i+1)).html(catClickMsg);		
+			});
+		};
+		$('body').prepend(cat);
+	};
+
+	catGenerater();
+
 	</script>
 </body>
 </html>
