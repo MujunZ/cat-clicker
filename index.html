@@ -6,6 +6,25 @@
 	<script src="js/jQuery.js"></script>
 </head>
 <body>
+	<aside>
+		<ul>
+			<li class="catList" id="catList0">
+				<p><a href="#" id="catLink0">Alpha</a></p>
+			</li>
+			<li class="catList" id="catList1">
+				<p><a href="#" id="catLink1">Beta</a></p>
+			</li>
+			<li class="catList" id="catList2">
+				<p><a href="#" id="catLink2">Charlie</a></p>
+			</li>
+			<li class="catList" id="catList3">
+				<p><a href="#" id="catLink3">Delta</a></p>
+			</li>
+			<li class="catList" id="catList4">
+				<p><a href="#" id="catLink4">Echo</a></p>
+			</li>
+		</ul>
+	</aside>
 	<div id="catCounts">
 	</div>
 	<script>
@@ -39,6 +58,7 @@
 
 			catContainer.classList.add('cats');
 			catContainer.id = 'cat' + i;
+			catContainer.style.display = 'none';
 
 			catImage.src = cats.cats[i].pic;
 			catImage.classList.add('catImg');
@@ -64,10 +84,28 @@
 			return catContainer;
 		}
 
+/*
+* @description append catContainer to catCounts
+*/
 		for (var i = 0; i < 2; i++) {
 			document.getElementById('catCounts').appendChild(catElementGenerator(i));
 		}
 
+/*
+* @description add switch listener to cats
+*/		
+		for (var i = 0; i < 2; i++) {
+			var catLink = document.getElementById('catLink' + i);
+			catLink.addEventListener('click',function () {
+				var catNum = this.id.slice(-1);
+				var catContainers = document.getElementsByClassName('cats');
+				for (var i = 0; i < 2; i++) {
+					catContainers[i].style.display = 'none';
+				}
+				var catShow = document.getElementById('cat' + catNum);
+				catShow.style.display = '';
+			});
+		};
 	</script>
 </body>
 </html>
