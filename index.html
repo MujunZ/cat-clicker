@@ -40,6 +40,18 @@
 		        "name": "Beta",
 		        "pic": "images/cat2.jpg",
 		        'clickCount': 0
+		    }, {
+		        "name": "Charlie",
+		        "pic": "images/cat3.jpg",
+		        'clickCount': 0
+		    }, {
+		        "name": "Delta",
+		        "pic": "images/cat4.jpg",
+		        'clickCount': 0
+		    }, {
+		        "name": "Echo",
+		        "pic": "images/cat5.jpg",
+		        'clickCount': 0
 		    }]
 		};
 
@@ -87,19 +99,19 @@
 /*
 * @description append catContainer to catCounts
 */
-		for (var i = 0; i < 2; i++) {
+		for (var i = 0; i < 5; i++) {
 			document.getElementById('catCounts').appendChild(catElementGenerator(i));
 		}
 
 /*
-* @description add switch listener to cats
+* @description add switch listener to
 */		
-		for (var i = 0; i < 2; i++) {
+		for (var i = 0; i < 5; i++) {
 			var catLink = document.getElementById('catLink' + i);
 			catLink.addEventListener('click',function () {
 				var catNum = this.id.slice(-1);
 				var catContainers = document.getElementsByClassName('cats');
-				for (var i = 0; i < 2; i++) {
+				for (var i = 0; i < 5; i++) {
 					catContainers[i].style.display = 'none';
 				}
 				var catShow = document.getElementById('cat' + catNum);
