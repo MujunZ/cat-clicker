@@ -52,18 +52,32 @@ $(function () {
 		};
 
 	var octopus = {
+		clickCat: function () {
+			var $catImg = $('.catImg');
+			for (var i = 0; i < $catImg.length; i++) {
+				$catImg.eq(i).click(function(iCopy) {
+					return function () {
+						data.cats[iCopy].clickCount++;
+						$('.catClickMsg').eq(iCopy).html("You clicked " + data.cats[iCopy].clickCount + " times.");
+					};
+				}(i));
+			};
+		},
+
 		switchCat: function() {
 			var catContainers = view.$catContainers;
 				$btns = $('.catBtns');
-				console.log($btns[1]);
 			for (var i = 0; i < $btns.length; i++) {
-				// console.log($btns[i]);
-				// console.log(catContainers[i].style.display);
-				$btns[i].click(function() {
-					console.log('good');
-					this.catHide();
-					catContainers[i].style.display = '';
-				});
+				var btn = $btns.eq(i);
+					catContainer = catContainers.eq(i);
+
+				//see https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/271165859175461/lessons/3417188540/concepts/34803486710923#
+				btn.click(function(iCopy) {
+					return function () {
+						octopus.catHide();
+						catContainers.eq(iCopy).css('display', '');
+					};
+				}(i));	
 			}
 		},
 
@@ -90,6 +104,7 @@ $(function () {
 
 		init: function() {
 			view.init();
+			view.render();
 		}
 	};
 
@@ -111,7 +126,7 @@ $(function () {
 		},
 
 		render: function () {
-
+			octopus.clickCat();
 		}
 	};
 
