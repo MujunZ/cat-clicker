@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Cat Clicker</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src = "js/app-old.js" async></script>
+	<script src = "js/app.js" async></script>
 </head>
 <body>
-	<aside>
+<!-- 	<aside>
 		<ul>
 			<li class="catList" id="catList0">
 				<p><button href="#" id="catLink0">Alpha</button></p>
@@ -25,8 +25,22 @@
 				<p><button href="#" id="catLink4">Echo</button></p>
 			</li>
 		</ul>
-	</aside>
+	</aside> -->
+	<ul class="catList" id="catList">
+	</ul>
 	<div id="catCounts">
 	</div>
+	<script type="text/template" data-template="catTemp">
+		<div class="cats" id="cat{{id}}">
+			<h1 class="catName" id="catName{{id}}">{{catName}}</h1>
+			<img src="{{pic}}" alt="" class="catImg" id="catImg{{id}}">
+			<p class="catClickMsg" id="catClickMsg{{id}}">{{clickCount}}</p>
+		</div>
+	</script>
+	<script type="text/template" data-template="btnTemp">
+		<li class="catli" id="catli{{id}}">
+			<p><button href="#" id="catBtn{{id}}" class="catBtns">{{name}}</button></p>
+		</li>
+	</script>
 </body>
 </html>
