@@ -9,6 +9,11 @@
 			flex-wrap: wrap;
 			list-style-type: none;
 		}
+
+		.adminContainer {
+			text-align: right;
+			float: right;
+		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src = "js/app.js" async></script>
@@ -16,6 +21,19 @@
 <body>
 	<ul class="catList" id="catList">
 	</ul>
+	<div class="adminContainer" id='adminContainer'>
+		<button id="adminBtn" class="adminBtn">admin</button>
+		<form class="catForm">
+			<p>Cat Name</p>
+			<input type="text" name="catName" value="{{data}}" class="catNameInput">
+			<p>Image URL</p>
+			<input type="text" name="catUrl" value="{{data}}" class="catUrlInput">
+			<p>Cat Clicks</p>
+			<input type="text" name="catClicks" value="{{data}}" class="catClicksInput">
+			<input type="submit" name="" value="save">
+		</form>
+		<span></span>
+	</div>
 	<div id="catCounts">
 	</div>
 	<script type="text/template" data-template="catTemp">

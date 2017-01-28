@@ -1,5 +1,6 @@
 $(function () {
 	var data = {
+			currentCat: null,
 		   cats:[
 		      {
 		         "name":"Alpha",
@@ -64,6 +65,16 @@ $(function () {
 			};
 		},
 
+		inputCat: function () {
+			var catId = data.currentCat.id;
+			//console.log(catId - 1);
+			$('.catForm').submit(function (event) {
+				console.log(data.currentCat.name);
+				$( "span" ).text( "Validated..." ).show();
+    			return;
+			});
+		},
+
 		switchCat: function() {
 			var catContainers = view.$catContainers;
 				$btns = $('.catBtns');
@@ -75,7 +86,12 @@ $(function () {
 				btn.click(function(iCopy) {
 					return function () {
 						octopus.catHide();
-						catContainers.eq(iCopy).css('display', '');
+						catContainers.eq(iCopy).show();
+
+						//setCurrentCat
+						var cat = data.cats[iCopy];
+						octopus.setCurrentCat(cat);
+						octopus.createForm();
 					};
 				}(i));	
 			}
@@ -102,7 +118,19 @@ $(function () {
 			};
 		},
 
+		setCurrentCat: function (cat) {
+			data.currentCat = cat;
+			return data.currentCat;
+		},
+
+		createForm: function () {
+			$('.catNameInput').val(data.currentCat.name);
+			$('.catUrlInput').val(data.currentCat.pic);
+			$('.catClicksInput').val(data.currentCat.clickCount);
+		},
+
 		init: function() {
+			data.currentCat = data.cats[0];
 			view.init();
 			view.render();
 		}
@@ -122,11 +150,13 @@ $(function () {
 			this.$catContainers = $('.cats');
 
 			octopus.catHide();
-			octopus.switchCat();
+			octopus.createForm();
 		},
 
 		render: function () {
 			octopus.clickCat();
+			octopus.switchCat();
+			octopus.inputCat();
 		}
 	};
 
