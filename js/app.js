@@ -68,7 +68,7 @@ $(function () {
 
 		adminShow: function () {
 			$('.adminContainer').click(function () {
-				$('form').show();
+				$('form').toggle();
 			})
 		},
 
