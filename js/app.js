@@ -60,23 +60,38 @@ $(function () {
 					return function () {
 						data.cats[iCopy].clickCount++;
 						$('.catClickMsg').eq(iCopy).html("You clicked " + data.cats[iCopy].clickCount + " times.");
+						$('.catClicksInput').val(data.currentCat.clickCount);
 					};
 				}(i));
 			};
 		},
 
+		adminShow: function () {
+			$('.adminContainer').click(function () {
+				$('form').show();
+			})
+		},
+
 		inputCat: function () {
-			var catId = data.currentCat.id;
-			//console.log(catId - 1);
 			$('.catForm').submit(function (event) {
-				console.log(data.currentCat.name);
-				$( "span" ).text( "Validated..." ).show();
-    			return;
+				var catId = data.currentCat.id;
+				data.cats[catId -1].name = $('.catNameInput').val();
+				data.cats[catId -1].pic = $('.catUrlInput').val();
+				data.cats[catId -1].clickCount = $('.catClicksInput').val();
+				$('#catBtn'+catId).text(data.cats[catId -1].name);
+				$('#catCounts').html('');
+				octopus.createCat();
+				$('.catClickMsg').eq(catId -1).html("You clicked " + data.cats[catId -1].clickCount + " times.");
+				octopus.clickCat();
+				octopus.switchCat();
+				octopus.catHide();
+				$('.cats').eq(catId-1).show();
+    			return false;
 			});
 		},
 
 		switchCat: function() {
-			var catContainers = view.$catContainers;
+			var catContainers = $('.cats');
 				$btns = $('.catBtns');
 			for (var i = 0; i < $btns.length; i++) {
 				var btn = $btns.eq(i);
@@ -98,7 +113,7 @@ $(function () {
 		},
 
 		catHide: function () {
-			var catContainers = view.$catContainers;
+			var catContainers = $('.cats');
 			for (var i = 0; i < catContainers.length; i++) {
 				catContainers[i].style.display = 'none';
 			};
@@ -120,6 +135,7 @@ $(function () {
 
 		setCurrentCat: function (cat) {
 			data.currentCat = cat;
+			//console.log(data.currentCat.id);
 			return data.currentCat;
 		},
 
@@ -151,6 +167,7 @@ $(function () {
 
 			octopus.catHide();
 			octopus.createForm();
+			octopus.adminShow();
 		},
 
 		render: function () {
