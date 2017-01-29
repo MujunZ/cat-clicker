@@ -3,121 +3,50 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cat Clicker</title>
-	<script src="js/jQuery.js"></script>
+	<style>
+		.catList {
+			display: flex;
+			flex-wrap: wrap;
+			list-style-type: none;
+		}
+
+		.adminContainer {
+			text-align: right;
+			float: right;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src = "js/app.js" async></script>
 </head>
 <body>
-	<aside>
-		<ul>
-			<li class="catList" id="catList0">
-				<p><a href="#" id="catLink0">Alpha</a></p>
-			</li>
-			<li class="catList" id="catList1">
-				<p><a href="#" id="catLink1">Beta</a></p>
-			</li>
-			<li class="catList" id="catList2">
-				<p><a href="#" id="catLink2">Charlie</a></p>
-			</li>
-			<li class="catList" id="catList3">
-				<p><a href="#" id="catLink3">Delta</a></p>
-			</li>
-			<li class="catList" id="catList4">
-				<p><a href="#" id="catLink4">Echo</a></p>
-			</li>
-		</ul>
-	</aside>
+	<ul class="catList" id="catList">
+	</ul>
+	<div class="adminContainer" id='adminContainer'">
+		<button id="adminBtn" class="adminBtn">admin</button>
+		<form class="catForm" style="display: none">
+			<p>Cat Name</p>
+			<input type="text" name="catName" value="{{data}}" class="catNameInput">
+			<p>Image URL</p>
+			<input type="text" name="catUrl" value="{{data}}" class="catUrlInput">
+			<p>Cat Clicks</p>
+			<input type="text" name="catClicks" value="{{data}}" class="catClicksInput">
+			<input type="submit" name="" value="save">
+		</form>
+		<span></span>
+	</div>
 	<div id="catCounts">
 	</div>
-	<script>
-/*
-* @description create cats and count clicks.
-*/
-		var cats = {
-		    "cats": [{
-		        "name": "Alpha",
-		        "pic": "images/cat1.jpg",
-		        'clickCount': 0
-		    }, {
-		        "name": "Beta",
-		        "pic": "images/cat2.jpg",
-		        'clickCount': 0
-		    }, {
-		        "name": "Charlie",
-		        "pic": "images/cat3.jpg",
-		        'clickCount': 0
-		    }, {
-		        "name": "Delta",
-		        "pic": "images/cat4.jpg",
-		        'clickCount': 0
-		    }, {
-		        "name": "Echo",
-		        "pic": "images/cat5.jpg",
-		        'clickCount': 0
-		    }]
-		};
-
-		var catElementGenerator = function (i) {
-			var catContainer,
-				catImage,
-				catName,
-				catClickMsg,
-				clickCount;
-
-			catContainer = document.createElement('div');
-			catImage = document.createElement('img');
-			catName = document.createElement('h1');
-			catClickMsg = document.createElement('p');
-			clickCount = cats.cats[i].clickCount;
-
-			catContainer.classList.add('cats');
-			catContainer.id = 'cat' + i;
-			catContainer.style.display = 'none';
-
-			catImage.src = cats.cats[i].pic;
-			catImage.classList.add('catImg');
-			catImage.id= 'catImg' + i;
-
-			catName.classList.add('catName');
-			catName.id= 'catName' +1;
-			catName.innerHTML = 'My name is ' + cats.cats[i].name + '.';
-
-			catClickMsg.classList.add('catClickMsg');
-			catClickMsg.id = 'catClickMsg' +i;
-			catClickMsg.innerHTML = 'Click Me';
-
-			catContainer.appendChild(catName);
-			catContainer.appendChild(catImage);
-			catContainer.appendChild(catClickMsg);
-
-			catImage.addEventListener('click', function (i) {
-				clickCount++;
-				catClickMsg.innerHTML = 'Clicked ' + clickCount + ' times.'; 
-			}, false)
-
-			return catContainer;
-		}
-
-/*
-* @description append catContainer to catCounts
-*/
-		for (var i = 0; i < 5; i++) {
-			document.getElementById('catCounts').appendChild(catElementGenerator(i));
-		}
-
-/*
-* @description add switch listener to
-*/		
-		for (var i = 0; i < 5; i++) {
-			var catLink = document.getElementById('catLink' + i);
-			catLink.addEventListener('click',function () {
-				var catNum = this.id.slice(-1);
-				var catContainers = document.getElementsByClassName('cats');
-				for (var i = 0; i < 5; i++) {
-					catContainers[i].style.display = 'none';
-				}
-				var catShow = document.getElementById('cat' + catNum);
-				catShow.style.display = '';
-			});
-		};
+	<script type="text/template" data-template="catTemp">
+		<div class="cats" id="cat{{id}}">
+			<h1 class="catName" id="catName{{id}}">{{catName}}</h1>
+			<img src="{{pic}}" alt="" class="catImg" id="catImg{{id}}">
+			<p class="catClickMsg" id="catClickMsg{{id}}">{{clickCount}}</p>
+		</div>
+	</script>
+	<script type="text/template" data-template="btnTemp">
+		<li class="catli" id="catli{{id}}">
+			<p><button href="#" id="catBtn{{id}}" class="catBtns">{{name}}</button></p>
+		</li>
 	</script>
 </body>
 </html>
